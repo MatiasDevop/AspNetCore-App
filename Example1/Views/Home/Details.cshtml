@@ -1,0 +1,37 @@
+﻿@model DetailsView
+@{
+    ViewBag.Title = "Friedns Index";
+    //THe operator combined Null?? return the value from left operand if not is Null in another case.
+    var rutaPhoto = "~/images/" + (Model.Friend.routePhoto ?? "typescript-logo.png");
+}
+
+    <div class="row justify-content-center m-3">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1>@Model.Friend.Name</h1>
+                </div>    
+
+                <div>
+                    <img class="card-img-top" src="@rutaPhoto" asp-append-version="true"/>
+
+                    <h4> Amigo Id: @Model.Friend.Id</h4>
+                    <h4> Email: @Model.Friend.Email</h4>
+                    <h4> City: @Model.Friend.City</h4>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="#" class="btn btn-primary">Back</a>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@section Scripts
+{
+
+    <script src="~/js/MyScript.js"></script>
+}
