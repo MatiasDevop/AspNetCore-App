@@ -14364,8 +14364,18 @@
   "RootNamespace": "Example1",
   "Documents": [
     {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Home\\Edit.cshtml",
+      "TargetPath": "Views\\Home\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Home\\FriendNotFound.cshtml",
+      "TargetPath": "Views\\Home\\FriendNotFound.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14381,6 +14391,11 @@
     {
       "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Shared\\Error.cshtml",
+      "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
     },
     {

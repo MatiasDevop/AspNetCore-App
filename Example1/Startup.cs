@@ -43,26 +43,27 @@ namespace Example1
                     SourceCodeLineCount = 2
                 };
 
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage(d);
             }
             else if(env.IsProduction() || env.IsStaging())
             {
-                app.UseExceptionHandler("/Error");
+                // app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithRedirects("/Error/{0}");
+
             }
 
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();// for setting our routing views and controller
+           /// app.UseMvcWithDefaultRoute();// for setting our routing views and controller
 
             //app.Run(async (context) => // this is a Middleware 
             //{
             //    //throw new Exception("dasdsada");
             //    await context.Response.WriteAsync("Hellow");
             //});
-            //app.UseMvc();
-            //    (routes =>// this is the way to config our routes like you want to
-            //{
-            //    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-            //});
+            app.UseMvc(routes =>// this is the way to config our routes like you want to
+                {
+                    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                });
         }
     }
 }
