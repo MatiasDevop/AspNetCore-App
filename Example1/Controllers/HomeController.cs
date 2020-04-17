@@ -40,6 +40,7 @@ namespace Example1.Controllers
         [Route("Home/Details/{id?}")]
         public ViewResult Details(int? id)
         {
+            //throw new Exception("Forzan error......."); //thits is for development enviroment
             //Friend friend = _friendStore.getFriendData(2);
             DetailsView details = new DetailsView();
             details.Friend = _friendStore.getFriendData(id?? 1);

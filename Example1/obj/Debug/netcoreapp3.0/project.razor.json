@@ -14379,6 +14379,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Shared\\ErrorGeneric.cshtml",
+      "TargetPath": "Views\\Shared\\ErrorGeneric.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"

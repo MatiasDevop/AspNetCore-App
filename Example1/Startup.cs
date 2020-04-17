@@ -6,6 +6,7 @@ using Example1.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,8 @@ namespace Example1
             //services.AddMvcCore(options => options.EnableEndpointRouting = false); // this is on level more with improvement tha got net Core
             //services.AddSingleton<IFriendStore, MockFriendRepository>();
             services.AddScoped<IFriendStore, SQLFriendRepository>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
            
         }
 
@@ -48,11 +51,13 @@ namespace Example1
             else if(env.IsProduction() || env.IsStaging())
             {
                 // app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Error");
                 app.UseStatusCodePagesWithRedirects("/Error/{0}");
 
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
            /// app.UseMvcWithDefaultRoute();// for setting our routing views and controller
 
             //app.Run(async (context) => // this is a Middleware 
