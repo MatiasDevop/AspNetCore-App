@@ -115,6 +115,8 @@ E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Example1.AssemblyInfo.cs
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Example1.TagHelpers.input.cache
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Example1.TagHelpers.output.cache
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Example1.RazorCoreGenerate.cache
+E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Razor\Views\Accounts\Login.cshtml.g.cs
+E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Razor\Views\Accounts\Register.cshtml.g.cs
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Razor\Views\Home\Create.cshtml.g.cs
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Razor\Views\Home\Details.cshtml.g.cs
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Razor\Views\Home\Edit.cshtml.g.cs
@@ -135,4 +137,3 @@ E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\staticwebassets\Example1.S
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Example1.dll
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Example1.pdb
 E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Example1.genruntimeconfig.cache
-E:\Net Core\Example1\Example1\obj\Debug\netcoreapp3.0\Razor\Views\Accounts\Register.cshtml.g.cs

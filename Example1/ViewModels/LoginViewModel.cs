@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Example1.ViewModels
 {
-    public class RegisterModel
+    public class LoginViewModel
     {
         [Required(ErrorMessage = "Email obligatory")]
-        [Display(Name = "Email")]
-        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Format Incorret")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -18,11 +16,7 @@ namespace Example1.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Repeat Password")]
-        [Compare("Password", ErrorMessage = "Password and Password of confirmation dosen't match up")]
-        public string PasswordValid { get; set; }
-
-
+        [Display(Name = "Remember me")]
+        public bool RememberPassword { get; set; }
     }
 }

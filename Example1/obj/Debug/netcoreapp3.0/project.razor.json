@@ -14384,6 +14384,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Accounts\\Register.cshtml",
+      "TargetPath": "Views\\Accounts\\Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
@@ -14411,6 +14416,11 @@
     {
       "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Accounts\\Login.cshtml",
+      "TargetPath": "Views\\Accounts\\Login.cshtml",
       "FileKind": "mvc"
     },
     {
