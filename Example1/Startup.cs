@@ -32,8 +32,15 @@ namespace Example1
             //services.AddSingleton<IFriendStore, MockFriendRepository>();
             services.AddScoped<IFriendStore, SQLFriendRepository>();
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
-           
+            services.AddIdentity<IdentityUser, IdentityRole>().AddErrorDescriber<ErrorCastellano>()
+                .AddEntityFrameworkStores<AppDbContext>();
+            
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireNonAlphanumeric = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

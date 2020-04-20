@@ -10,10 +10,10 @@ namespace Example1.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Obligatorio"), MaxLength(100, ErrorMessage = "No more than 100 charts")]
+        [Required(ErrorMessage = "Obligatory"), MaxLength(100, ErrorMessage = "No more than 100 charts")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage ="Obligatorio")]
+        [Required(ErrorMessage ="Obligatory")]
         [Display(Name = "Email")]
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Format Incorret")]
         public string Email { get; set; }
