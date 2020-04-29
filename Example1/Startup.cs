@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Example1.Models;
+using Example1.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,13 +32,19 @@ namespace Example1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("ConexionSQL")));
-            services.AddMvc(options => options.EnableEndpointRouting = false);// clasic mvc
+            services.AddMvc(options => {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+                options.EnableEndpointRouting = false;
+            }).AddXmlSerializerFormatters();// clasic mvc
             //services.AddMvcCore(options => options.EnableEndpointRouting = false); // this is on level more with improvement tha got net Core
             //services.AddSingleton<IFriendStore, MockFriendRepository>();
             services.AddScoped<IFriendStore, SQLFriendRepository>();
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddErrorDescriber<ErrorCastellano>()
+            services.AddIdentity<UserApplication, IdentityRole>(options => { }).AddErrorDescriber<ErrorCastellano>()
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Accounts/Login");
             
             services.Configure<IdentityOptions>(options =>
             {
@@ -65,17 +76,24 @@ namespace Example1
 
             app.UseStaticFiles();
             app.UseAuthentication();
-           /// app.UseMvcWithDefaultRoute();// for setting our routing views and controller
+            //app.UseMvcWithDefaultRoute();// for setting our routing views and controller
 
             //app.Run(async (context) => // this is a Middleware 
             //{
             //    //throw new Exception("dasdsada");
             //    await context.Response.WriteAsync("Hellow");
             //});
-            app.UseMvc(routes =>// this is the way to config our routes like you want to
-                {
-                    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                });
+            //app.UseMvc(routes =>// this is the way to config our routes like you want to
+            //    {
+            //        routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            //        routes.MapRoute("", "{controller=Admin}/{action=CreateRol}");
+            //    });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
         }
     }
 }

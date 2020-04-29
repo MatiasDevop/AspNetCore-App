@@ -14409,6 +14409,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Admin\\EditRolUser.cshtml",
+      "TargetPath": "Views\\Admin\\EditRolUser.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Home\\_ViewStart.cshtml",
       "TargetPath": "Views\\Home\\_ViewStart.cshtml",
       "FileKind": "mvc"
@@ -14426,6 +14431,21 @@
     {
       "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Home\\Details.cshtml",
       "TargetPath": "Views\\Home\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Admin\\EditRol.cshtml",
+      "TargetPath": "Views\\Admin\\EditRol.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Admin\\CreateRol.cshtml",
+      "TargetPath": "Views\\Admin\\CreateRol.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\Net Core\\Example1\\Example1\\Views\\Admin\\ListRoles.cshtml",
+      "TargetPath": "Views\\Admin\\ListRoles.cshtml",
       "FileKind": "mvc"
     }
   ],

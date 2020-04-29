@@ -1,5 +1,6 @@
 ﻿using Example1.Models;
 using Example1.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Differencing;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Example1.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IFriendStore _friendStore;
@@ -20,18 +22,10 @@ namespace Example1.Controllers
             _friendStore = FriendStore;
             _hosting = hostingEnvironment;
         }
-        //public string Index()
-        //{
-        //    return _friendStore.getFriendData(1).Email;
-        //}
-        //public JsonResult Details()
-        //{
-        //    Friend model = _friendStore.getFriendData(1);
-        //    return Json(model);
-        //}
         [Route("")]
         [Route("Home")]
         [Route("Home/Index")]
+       // [AllowAnonymous] // this is jus for everybody
         public ViewResult Index(int id)
         {
             var model = _friendStore.GetAllFriends();
@@ -58,11 +52,14 @@ namespace Example1.Controllers
         }
         [Route("Home/Create")]
         [HttpGet]
+        //[Authorize] we can take this on the top
         public ViewResult Create()
         {
             return View();
         }
         [HttpPost]
+        [Route("Home/Create")]
+        //[Authorize]
         public IActionResult Create(CreateFriendModel a)
         {
             if (ModelState.IsValid)
@@ -74,7 +71,6 @@ namespace Example1.Controllers
                     guidImagen = Guid.NewGuid().ToString() + a.Photo.FileName;
                     string rutaDefenitly = Path.Combine(ficherosImages, guidImagen);
                     a.Photo.CopyTo(new FileStream(rutaDefenitly, FileMode.Create));
-
                 }
 
                 Friend newFriend = new Friend();

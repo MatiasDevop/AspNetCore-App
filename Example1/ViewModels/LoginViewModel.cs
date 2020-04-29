@@ -12,7 +12,7 @@ namespace Example1.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password obligatorio")]
+        [Required(ErrorMessage = "Password obligatorio"), MinLength(4, ErrorMessage = "Fours digits is must")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
