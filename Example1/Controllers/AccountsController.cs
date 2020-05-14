@@ -48,6 +48,10 @@ namespace Example1.Controllers
                 //if the user created was correct and log in successfully, redirect to the home Page
                 if (response.Succeeded)
                 {
+                    if (processLogin.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Admin");
+                    }
                     await processLogin.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home");
                 }
@@ -116,6 +120,14 @@ namespace Example1.Controllers
             {
                 return Json($"The email {email} it's not available");
             }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Accounts/AccessDeneid")]
+        public IActionResult AccessDeneid()
+        {
+            return View();
         }
     }
 }

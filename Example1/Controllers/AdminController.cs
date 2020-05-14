@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Example1.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -10,6 +11,8 @@ using Microsoft.VisualBasic;
 
 namespace Example1.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> processRoles;
@@ -117,6 +120,35 @@ namespace Example1.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Admin/DeleteRole")]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            // Search for Rol Id
+            var rol = await processRoles.FindByIdAsync(id);
+
+            if (rol == null)
+            {
+                ViewBag.ErrorMessage = $"Rol with Id = {id} was not found";
+                return View("Error");
+            }
+            else
+            {
+                var result = await processRoles.DeleteAsync(rol);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListRoles");
+            }
+        }
+
         [HttpGet]
         [Route("Admin/EditRolUser")]
         public async Task<IActionResult> EditRolUser(string rolId)
@@ -203,6 +235,106 @@ namespace Example1.Controllers
 
             return RedirectToAction("EditRol", new { Id = rolId });
         }
+
+        [HttpGet]
+        [Route("Admin/ListUsers")]
+        public IActionResult ListUsers()
+        {
+            //List<UserApplication> users = new List<UserApplication>();
+            var users = processUsers.Users;
+            return View(users);
+        }
+
+        [HttpGet]
+        [Route("Admin/EditUser")]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            // Search for user Id
+            var user = await processUsers.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} was not found";
+                return View("Error");
+            }
+            // A list of Notifications
+            var userClaims = await processUsers.GetClaimsAsync(user);
+            // GetRolesAsync returns the lis of user roles
+            var userRoles = await processUsers.GetRolesAsync(user);
+
+            var model = new EditUserModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                helpPass = user.helpPass,
+                Notifications = userClaims.Select(c => c.Value).ToList(),
+                Roles = userRoles
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Route("Admin/EditUser")]
+        public async Task<IActionResult> EditUser(EditUserModel model)
+        {
+            // Search for user Id
+            var user = await processUsers.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.Id} was not found";
+                return View("Error");
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+                user.helpPass = model.helpPass;
+
+                var response = await processUsers.UpdateAsync(user);
+                if (response.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+                foreach (var error in response.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [Route("Admin/DeleteUser")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await processUsers.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} no founded";
+                return View("Error");
+            }
+            else
+            {
+                var result = await processUsers.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListUsers");
+            }
+        }
+       
 
     }
 }

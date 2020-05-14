@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Net Core\\Example1\\Example1\\Example1.csproj": {}
+    "D:\\NET Development\\Net Core\\Example1\\Example1\\Example1.csproj": {}
   },
   "projects": {
-    "E:\\Net Core\\Example1\\Example1\\Example1.csproj": {
+    "D:\\NET Development\\Net Core\\Example1\\Example1\\Example1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Net Core\\Example1\\Example1\\Example1.csproj",
+        "projectUniqueName": "D:\\NET Development\\Net Core\\Example1\\Example1\\Example1.csproj",
         "projectName": "Example1",
-        "projectPath": "E:\\Net Core\\Example1\\Example1\\Example1.csproj",
-        "packagesPath": "C:\\Users\\Nestor\\.nuget\\packages\\",
-        "outputPath": "E:\\Net Core\\Example1\\Example1\\obj\\",
+        "projectPath": "D:\\NET Development\\Net Core\\Example1\\Example1\\Example1.csproj",
+        "packagesPath": "C:\\Users\\nestdev\\.nuget\\packages\\",
+        "outputPath": "D:\\NET Development\\Net Core\\Example1\\Example1\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Nestor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nestdev\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -94,6 +91,14 @@
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[3.0.3, 3.0.3]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
             }
           ],
           "frameworkReferences": {

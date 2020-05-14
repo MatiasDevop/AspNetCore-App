@@ -44,7 +44,12 @@ namespace Example1
             services.AddIdentity<UserApplication, IdentityRole>(options => { }).AddErrorDescriber<ErrorCastellano>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
-            services.ConfigureApplicationCookie(options => options.LoginPath = "/Accounts/Login");
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Accounts/Login";
+                options.LoginPath = "/Accounts/AccessDeneid";
+            });
+         
             
             services.Configure<IdentityOptions>(options =>
             {
