@@ -6,22 +6,27 @@ using Example1.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic;
 
 namespace Example1.Controllers
 {
     [Authorize(Roles = "Admin")]
-    //[Authorize(Roles = "Admin")]
+   
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> processRoles;
         private readonly UserManager<UserApplication> processUsers;
+        private readonly ILogger<AdminController> log;
         public AdminController(RoleManager<IdentityRole> processRoles,
-                                UserManager<UserApplication> processUsers)
+                                UserManager<UserApplication> processUsers,
+                                ILogger<AdminController> log)
         {
             this.processRoles = processRoles;
             this.processUsers = processUsers;
+            this.log = log;
         }
         [HttpGet]
         [Route("Admin/CreateRol")]
@@ -134,18 +139,32 @@ namespace Example1.Controllers
             }
             else
             {
-                var result = await processRoles.DeleteAsync(rol);
-                if (result.Succeeded)
+                try
                 {
-                    return RedirectToAction("ListRoles");
-                }
+                    var result = await processRoles.DeleteAsync(rol);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ListRoles");
+                    }
 
-                foreach (var error in result.Errors)
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+                    return View("ListRoles");
+
+                }
+                // If this is kind of exepcion weknow tha we can't delete cuze it has roles
+                catch (DbUpdateException ex)
                 {
-                    ModelState.AddModelError("", error.Description);
+                    log.LogError($"Error executed when try to delete Rol:{ex}");
+                    // we will pass title from error and the message1
+                    ViewBag.ErrorTitle = $"The Rol{rol.Name} is being used";
+                    ViewBag.ErrorMessage = $"The Rol {rol.Name} it can not be deleted cuze it contains. before to delete quit ";
+                    return View("ErrorGeneric");
                 }
-
-                return View("ListRoles");
+                
             }
         }
 

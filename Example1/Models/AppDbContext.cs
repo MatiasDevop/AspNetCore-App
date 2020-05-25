@@ -19,6 +19,11 @@ namespace Example1.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
             //modelBuilder.Entity<Friend>().HasData(new Friend 
             //{   Id = 1, 
             //    Name = "PEPE",

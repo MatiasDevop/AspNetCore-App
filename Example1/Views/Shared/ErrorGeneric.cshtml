@@ -1,4 +1,13 @@
-﻿<h3> A error ocurred with your request</h3>
+﻿@if (ViewBag.ErrorTitle == null)
+{
+    <h3> A error ocurred with your request</h3>
 
-<h5> Pleas contact with me ......</h5>
-<br />
+    <h5> Pleas contact with me ......</h5>
+    <br />
+}
+else
+{
+    <h1 class="text-danger">@ViewBag.ErrorTitle</h1>
+    <h6 class="text-danger">@ViewBag.ErrorMessage</h6>
+}
+
